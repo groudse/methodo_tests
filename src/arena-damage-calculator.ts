@@ -4,10 +4,10 @@ import { Buff } from "./model/buff";
 import { HeroElement } from "./model/hero-element";
 
 export class ArenaDamageCalculator {
-  constructor(private randomProvider: IRandomProvider) {}
+  constructor(private readonly randomProvider: IRandomProvider) {}
 
   computeDamage(attacker: Hero, defenders: Hero[]): Hero[] {
-    const pow = attacker.pow;
+
 
     const adv: Hero[] = [];
     const eq: Hero[] = [];
