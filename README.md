@@ -26,3 +26,8 @@ The coverage is automatically run with `npm test`. You have a report directly in
 You need green tests to perform the mutation testing. 
 
 The mutation report will be located in `reports/mutation/index.html`
+
+
+## Approval Testing 
+
+Capturer le résultat de la fonction computeDamage dans différents scénarios, et vérifier qu’il reste inchangé (snapshot/approval).
