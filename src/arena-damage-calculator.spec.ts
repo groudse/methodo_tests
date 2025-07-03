@@ -106,5 +106,89 @@ describe("ArenaDamageCalculator with interface-based mocking", () => {
     expect(result).toMatchSnapshot();
   });
 
+  it("should handle element equality and push to eq[]", () => {
+    const mockRandom = new MockRandomProvider([0.0, 0.0]); 
+    const calculator = new ArenaDamageCalculator(mockRandom);
+  
+    const attacker = createHero(HeroElement.Fire, 1000, 0, 0, 0, 1000);
+    const defenders = [createHero(HeroElement.Fire, 0, 0, 0, 0, 1000)];
+  
+    const result = calculator.computeDamage(attacker, defenders);
+  
+    expect(result).toMatchSnapshot();
+  });
+  
+  it("should handle element disadvantage and push to dis[]", () => {
+    const mockRandom = new MockRandomProvider([0.0, 0.0]); 
+    const calculator = new ArenaDamageCalculator(mockRandom);
+  
+    const attacker = createHero(HeroElement.Water, 1000, 0, 0, 0, 1000);
+    const defenders = [createHero(HeroElement.Earth, 0, 0, 0, 0, 1000)];
+  
+    const result = calculator.computeDamage(attacker, defenders);
+  
+    expect(result).toMatchSnapshot();
+  });
+  
+  it("should apply attack buff without critical hit", () => {
+    const mockRandom = new MockRandomProvider([0.0, 1.0]); 
+    const calculator = new ArenaDamageCalculator(mockRandom);
+  
+    const attacker = createHero(HeroElement.Fire, 1000, 0, 0, 0, 1000, [Buff.Attack]);
+    const defenders = [createHero(HeroElement.Earth, 0, 0, 0, 0, 1000)];
+  
+    const result = calculator.computeDamage(attacker, defenders);
+  
+    expect(result).toMatchSnapshot();
+  });
+  
+  it("should reduce damage due to defense buff on defender", () => {
+    const mockRandom = new MockRandomProvider([0.0, 1.0]); 
+    const calculator = new ArenaDamageCalculator(mockRandom);
+  
+    const attacker = createHero(HeroElement.Fire, 1000, 0, 0, 0, 1000);
+    const defenders = [createHero(HeroElement.Earth, 0, 500, 0, 0, 1000, [Buff.Defense])];
+  
+    const result = calculator.computeDamage(attacker, defenders);
+  
+    expect(result).toMatchSnapshot();
+  });
+  
+  it("should go through dmg > 0 branch", () => {
+    const mockRandom = new MockRandomProvider([0.0, 0.0]); 
+    const calculator = new ArenaDamageCalculator(mockRandom);
+  
+    const attacker = createHero(HeroElement.Fire, 1000, 0, 0, 100, 1000);
+    const defenders = [createHero(HeroElement.Earth, 0, 0, 0, 0, 1000)];
+  
+    const result = calculator.computeDamage(attacker, defenders);
+  
+    expect(result).toMatchSnapshot();
+  });
+  
+
+  it("should apply 1.2x multiplier for elemental advantage", () => {
+    const mockRandom = new MockRandomProvider([0.0, 0.0]);
+    const calculator = new ArenaDamageCalculator(mockRandom);
+  
+    const attacker = createHero(HeroElement.Fire, 1000, 0, 0, 0, 1000);
+    const defenders = [createHero(HeroElement.Earth, 0, 0, 0, 0, 1000)];
+  
+    const result = calculator.computeDamage(attacker, defenders);
+  
+    expect(result).toMatchSnapshot();
+  });
+  
+  it("should not set lp below 0 when damage exceeds lp", () => {
+    const mockRandom = new MockRandomProvider([0.0, 0.0]); // adv, crit
+    const calculator = new ArenaDamageCalculator(mockRandom);
+  
+    const attacker = createHero(HeroElement.Fire, 10000, 0, 500, 100, 1000);
+    const defenders = [createHero(HeroElement.Earth, 0, 0, 0, 0, 200)];
+  
+    const result = calculator.computeDamage(attacker, defenders);
+  
+    expect(result).toMatchSnapshot();
+  });
 
 });

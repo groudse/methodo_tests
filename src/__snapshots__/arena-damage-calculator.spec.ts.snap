@@ -1,5 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ArenaDamageCalculator with interface-based mocking should apply 1.2x multiplier for elemental advantage 1`] = `
+Array [
+  Hero {
+    "buffs": Array [],
+    "crtr": 0,
+    "def": 0,
+    "element": 2,
+    "leth": 0,
+    "lp": 0,
+    "pow": 0,
+  },
+]
+`;
+
+exports[`ArenaDamageCalculator with interface-based mocking should apply attack buff without critical hit 1`] = `
+Array [
+  Hero {
+    "buffs": Array [],
+    "crtr": 0,
+    "def": 0,
+    "element": 2,
+    "leth": 0,
+    "lp": 0,
+    "pow": 0,
+  },
+]
+`;
+
 exports[`ArenaDamageCalculator with interface-based mocking should apply critical hit without buffs 1`] = `
 Array [
   Hero {
@@ -60,6 +88,48 @@ Array [
 ]
 `;
 
+exports[`ArenaDamageCalculator with interface-based mocking should go through dmg > 0 branch 1`] = `
+Array [
+  Hero {
+    "buffs": Array [],
+    "crtr": 0,
+    "def": 0,
+    "element": 2,
+    "leth": 0,
+    "lp": 0,
+    "pow": 0,
+  },
+]
+`;
+
+exports[`ArenaDamageCalculator with interface-based mocking should handle element disadvantage and push to dis[] 1`] = `
+Array [
+  Hero {
+    "buffs": Array [],
+    "crtr": 0,
+    "def": 0,
+    "element": 2,
+    "leth": 0,
+    "lp": 200,
+    "pow": 0,
+  },
+]
+`;
+
+exports[`ArenaDamageCalculator with interface-based mocking should handle element equality and push to eq[] 1`] = `
+Array [
+  Hero {
+    "buffs": Array [],
+    "crtr": 0,
+    "def": 0,
+    "element": 1,
+    "leth": 0,
+    "lp": 0,
+    "pow": 0,
+  },
+]
+`;
+
 exports[`ArenaDamageCalculator with interface-based mocking should match snapshot for known randomness sequence 1`] = `
 Array [
   Hero {
@@ -99,6 +169,20 @@ Array [
 ]
 `;
 
+exports[`ArenaDamageCalculator with interface-based mocking should not set lp below 0 when damage exceeds lp 1`] = `
+Array [
+  Hero {
+    "buffs": Array [],
+    "crtr": 0,
+    "def": 0,
+    "element": 2,
+    "leth": 0,
+    "lp": 0,
+    "pow": 0,
+  },
+]
+`;
+
 exports[`ArenaDamageCalculator with interface-based mocking should reduce damage by 20% when attacker is at elemental disadvantage 1`] = `
 Array [
   Hero {
@@ -108,6 +192,22 @@ Array [
     "element": 2,
     "leth": 0,
     "lp": 200,
+    "pow": 0,
+  },
+]
+`;
+
+exports[`ArenaDamageCalculator with interface-based mocking should reduce damage due to defense buff on defender 1`] = `
+Array [
+  Hero {
+    "buffs": Array [
+      1,
+    ],
+    "crtr": 0,
+    "def": 500,
+    "element": 2,
+    "leth": 0,
+    "lp": 180,
     "pow": 0,
   },
 ]

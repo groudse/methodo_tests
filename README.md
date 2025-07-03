@@ -40,3 +40,12 @@ Pour faire du Approval Testing robuste, surtout sur du code avec des effets seco
 - Modifier ArenaDamageCalculator pour recevoir un IRandomProvider :
 3. Créer une implémentation mockée pour les tests
 - faire un mock contrôlable dans les approval tests.
+
+### Qualité de tests 
+
+#### Couverture de tests 
+
+````
+npm test -- -u
+`````
+
