@@ -33,4 +33,78 @@ describe("ArenaDamageCalculator with interface-based mocking", () => {
 
     expect(result).toMatchSnapshot();
   });
+
+  it("should compute basic damage without buffs or crit", () => {
+    const mockRandom = new MockRandomProvider([0.0]); 
+    const calculator = new ArenaDamageCalculator(mockRandom);
+  
+    const attacker = createHero(HeroElement.Fire, 1000, 0, 0, 0, 1000);
+    const defenders = [createHero(HeroElement.Earth, 0, 0, 0, 0, 1000)];
+  
+    const result = calculator.computeDamage(attacker, defenders);
+  
+    expect(result).toMatchSnapshot();
+  });
+  
+  it("should apply critical hit without buffs", () => {
+    const mockRandom = new MockRandomProvider([0.0, 0.0]); 
+    const calculator = new ArenaDamageCalculator(mockRandom);
+  
+    const attacker = createHero(HeroElement.Fire, 1000, 0, 500, 100, 1000);
+    const defenders = [createHero(HeroElement.Earth, 0, 0, 0, 0, 1000)];
+  
+    const result = calculator.computeDamage(attacker, defenders);
+  
+    expect(result).toMatchSnapshot();
+  });
+
+  it("should apply defender's Defense buff correctly", () => {
+    const mockRandom = new MockRandomProvider([0.0, 0.0]); 
+    const calculator = new ArenaDamageCalculator(mockRandom);
+  
+    const attacker = createHero(HeroElement.Fire, 1000, 0, 0, 0, 1000);
+    const defenders = [createHero(HeroElement.Earth, 0, 0, 0, 0, 1000, [Buff.Defense])];
+  
+    const result = calculator.computeDamage(attacker, defenders);
+  
+    expect(result).toMatchSnapshot();
+  });
+
+  it("should reduce damage by 20% when attacker is at elemental disadvantage", () => {
+    const mockRandom = new MockRandomProvider([0.0, 0.0]);
+    const calculator = new ArenaDamageCalculator(mockRandom);
+  
+    const attacker = createHero(HeroElement.Water, 1000, 0, 0, 0, 1000);
+    const defenders = [createHero(HeroElement.Earth, 0, 0, 0, 0, 1000)];
+  
+    const result = calculator.computeDamage(attacker, defenders);
+  
+    expect(result).toMatchSnapshot();
+  });
+
+  it("should never result in negative damage", () => {
+    const mockRandom = new MockRandomProvider([0.0, 0.0]);
+    const calculator = new ArenaDamageCalculator(mockRandom);
+  
+    const attacker = createHero(HeroElement.Fire, 1000, 0, 0, 0, 1000);
+    const defenders = [createHero(HeroElement.Earth, 0, 10000, 0, 0, 1000)];
+  
+    const result = calculator.computeDamage(attacker, defenders);
+  
+    expect(result).toMatchSnapshot();
+  });
+
+  it("should combine critical hit, attack buff, and defense buff", () => {
+    const mockRandom = new MockRandomProvider([0.0, 0.0]); 
+    const calculator = new ArenaDamageCalculator(mockRandom);
+  
+    const attacker = createHero(HeroElement.Fire, 1000, 0, 1000, 100, 1000, [Buff.Attack]);
+    const defenders = [createHero(HeroElement.Earth, 0, 500, 0, 0, 1000, [Buff.Defense])];
+  
+    const result = calculator.computeDamage(attacker, defenders);
+  
+    expect(result).toMatchSnapshot();
+  });
+
+
 });
