@@ -8,6 +8,16 @@
     "progress"
   ],
   "testRunner": "jest",
+  "plugins": [
+    "@stryker-mutator/jest-runner"
+  ],
   "coverageAnalysis": "perTest",
-  "tsconfigFile": "tsconfig.json"
+  "tsconfigFile": "tsconfig.json",
+  "mutate": [
+    "src//*.ts",
+    "!src/services/**/*.ts",
+    "!src/model/**/*.ts",
+    "!src/__mocks__/*.ts",
+    "!src/arena-damage-calculator.spec.ts"
+  ]
 }
