@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ArenaDamageCalculator } from "../src/arena-damage-calculator";
 import { Hero } from "../src/model/hero";
 import { HeroElement } from "../src/model/hero-element";
