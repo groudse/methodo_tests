@@ -6,7 +6,8 @@ module.exports = {
     coverageProvider: 'v8',
     collectCoverageFrom: [
         "src/**/*.ts",
-        "!**/node_modules/**"
+        "!**/node_modules/**",
+        "!**/services/**"
     ],
     testEnvironment: 'node',
     transform: {
