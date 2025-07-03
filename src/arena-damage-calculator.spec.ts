@@ -216,5 +216,58 @@ describe("ArenaDamageCalculator with interface-based mocking", () => {
     expect(result[0].lp).toBe(0); // vérifie qu'on n'est pas passé sous 0
   });
 
+  it("should skip defenders with 0 or less lp", () => {
+    const mockRandom = new MockRandomProvider([0.0]); 
+    const calculator = new ArenaDamageCalculator(mockRandom);
+  
+    const attacker = createHero(HeroElement.Fire, 1000, 0, 0, 0, 1000);
+    const defenders = [
+      createHero(HeroElement.Earth, 0, 0, 0, 0, 0),
+      createHero(HeroElement.Earth, 0, 0, 0, 0, 1000) 
+    ];
+  
+    const result = calculator.computeDamage(attacker, defenders);
+  
+  
+    expect(result[0].lp).toBe(0); 
+    expect(result[1].lp).toBeLessThan(1000); 
+  });
+
+  it("should apply critical hit when random < crtr", () => {
+    const mockRandom = new MockRandomProvider([0.0, 0.0]); 
+    const calculator = new ArenaDamageCalculator(mockRandom);
+  
+    const attacker = createHero(HeroElement.Fire, 1000, 0, 500, 100, 1000);
+    const defenders = [createHero(HeroElement.Earth, 0, 0, 0, 0, 1000)];
+  
+    const result = calculator.computeDamage(attacker, defenders);
+  
+    expect(result[0].lp).toBeLessThan(1000); 
+  });
+
+  it("should apply attack buff without crit", () => {
+    const mockRandom = new MockRandomProvider([0.0, 1.0]); 
+    const calculator = new ArenaDamageCalculator(mockRandom);
+  
+    const attacker = createHero(HeroElement.Fire, 1000, 0, 0, 0, 1000, [Buff.Attack]);
+    const defenders = [createHero(HeroElement.Earth, 0, 0, 0, 0, 1000)];
+  
+    const result = calculator.computeDamage(attacker, defenders);
+  
+    expect(result[0].lp).toBeLessThan(1000); 
+  });
+
+  it("should not modify defender if damage is 0 or less", () => {
+    const mockRandom = new MockRandomProvider([0.0, 0.0]); 
+    const calculator = new ArenaDamageCalculator(mockRandom);
+  
+    const attacker = createHero(HeroElement.Fire, 1000, 0, 0, 100, 1000);
+    const defenders = [createHero(HeroElement.Earth, 0, 10000, 0, 0, 1000)];
+  
+    const result = calculator.computeDamage(attacker, defenders);
+  
+    expect(result[0].lp).toBe(1000); 
+  });
+
   
 });
