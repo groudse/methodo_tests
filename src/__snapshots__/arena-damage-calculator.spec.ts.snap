@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ArenaDamageCalculator (Approval Tests) should compute damage with attack buff 1`] = `
+exports[`ArenaDamageCalculator with interface-based mocking should match snapshot for known randomness sequence 1`] = `
 Array [
   Hero {
     "buffs": Array [],
@@ -11,84 +11,13 @@ Array [
     "lp": 0,
     "pow": 0,
   },
-  Hero {
-    "buffs": Array [],
-    "crtr": 0,
-    "def": 500,
-    "element": 0,
-    "leth": 0,
-    "lp": 1000,
-    "pow": 0,
-  },
-]
-`;
-
-exports[`ArenaDamageCalculator (Approval Tests) should compute damage with critical hit and buffs 1`] = `
-Array [
   Hero {
     "buffs": Array [
       1,
     ],
     "crtr": 0,
     "def": 500,
-    "element": 1,
-    "leth": 0,
-    "lp": 0,
-    "pow": 0,
-  },
-  Hero {
-    "buffs": Array [],
-    "crtr": 0,
-    "def": 500,
-    "element": 2,
-    "leth": 0,
-    "lp": 1000,
-    "pow": 0,
-  },
-]
-`;
-
-exports[`ArenaDamageCalculator (Approval Tests) should compute damage with defense buff 1`] = `
-Array [
-  Hero {
-    "buffs": Array [
-      1,
-    ],
-    "crtr": 0,
-    "def": 500,
-    "element": 1,
-    "leth": 0,
-    "lp": 1000,
-    "pow": 0,
-  },
-  Hero {
-    "buffs": Array [],
-    "crtr": 0,
-    "def": 500,
     "element": 0,
-    "leth": 0,
-    "lp": 0,
-    "pow": 0,
-  },
-]
-`;
-
-exports[`ArenaDamageCalculator (Approval Tests) should compute damage without buffs 1`] = `
-Array [
-  Hero {
-    "buffs": Array [],
-    "crtr": 0,
-    "def": 500,
-    "element": 1,
-    "leth": 0,
-    "lp": 0,
-    "pow": 0,
-  },
-  Hero {
-    "buffs": Array [],
-    "crtr": 0,
-    "def": 500,
-    "element": 2,
     "leth": 0,
     "lp": 1000,
     "pow": 0,

@@ -31,3 +31,12 @@ The mutation report will be located in `reports/mutation/index.html`
 ## Approval Testing 
 
 Capturer le résultat de la fonction computeDamage dans différents scénarios, et vérifier qu’il reste inchangé (snapshot/approval).
+
+Pour faire du Approval Testing robuste, surtout sur du code avec des effets secondaires et du non-déterminisme (comme Math.random), il faut :
+
+1. Utiliser l’interfaçage (abstraction)
+- isoler les dépendances non-déterministes derrière une interface, par exemple IRandomProvider.
+2. Injecter la dépendance dans la classe à tester
+Modifie ArenaDamageCalculator pour recevoir un IRandomProvider :
+3. Créer une implémentation mockée pour les tests
+Tu peux maintenant faire un mock contrôlable dans tes approval tests.
