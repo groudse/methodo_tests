@@ -55,15 +55,15 @@ describe("Arena damage calculator", function() {
       calculator.mockRandom(0);
       
       const earthAttacker2 = createMockHero(HeroElement.Earth, 1000, 0, 0, 0, 1000);
-      const waterDefender2 = createMockHero(HeroElement.Water, 0, 0, 0, 0, 2000); // Advantageous target
-      const fireDefender2 = createMockHero(HeroElement.Fire, 0, 0, 0, 0, 2000);   // Disadvantageous target
+      const waterDefender2 = createMockHero(HeroElement.Water, 0, 0, 0, 0, 2000);
+      const fireDefender2 = createMockHero(HeroElement.Fire, 0, 0, 0, 0, 2000);
       
       // Act
       calculator.computeDamage(earthAttacker2, [waterDefender2, fireDefender2]);
       
-      // Assert - Should attack advantageous target (Water)
-      expect(waterDefender2.lp).toBe(2000 - 1200); // Earth vs Water = advantageous
-      expect(fireDefender2.lp).toBe(2000); // Fire defender should be untouched
+      // Assert
+      expect(waterDefender2.lp).toBe(2000 - 1200);
+      expect(fireDefender2.lp).toBe(2000);
     });
 
     it("should select equivalent target when Fire attacker vs Fire", () => {
@@ -113,7 +113,7 @@ describe("Arena damage calculator", function() {
       
       // Act & Assert
       // Note: Ces tests couvrent bien les branches continue mais révèlent un comportement
-      // potentiellement problématique quand tous les défenseurs sont vaincus car l'appli crash
+      // potentiellement problématique quand tous les défenseurs sont vaincus car l'appli n'est pas prévu pour gérer ce cas
       // À corriger pour plus tard
       expect(() => {
         calculator.computeDamage(waterAttacker2, allDefeatedDefenders);
@@ -133,7 +133,7 @@ describe("Arena damage calculator", function() {
       
       // Act & Assert
       // Note: Ces tests couvrent bien les branches continue mais révèlent un comportement
-      // potentiellement problématique quand tous les défenseurs sont vaincus car l'appli crash
+      // potentiellement problématique quand tous les défenseurs sont vaincus car l'appli n'est pas prévu pour gérer ce cas
       // À corriger pour plus tard
       expect(() => {
         calculator.computeDamage(earthAttacker2, allDefeatedDefenders);
